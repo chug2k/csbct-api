@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -13,5 +13,10 @@ router.use("/auth", authApi);
 /* receiver endpoint */
 const receiverApi = require("./receiver.api");
 router.use("/receiver", receiverApi);
+
+
+/* Donation request endpoint */
+const donationRequestApi = require("./request.api");
+router.use("/donation_requests", donationRequestApi);
 
 module.exports = router;

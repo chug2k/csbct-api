@@ -12,4 +12,5 @@ utilsHelper.sendResponse = (res, status, success, data, errors, message) => {
   return res.status(status).json(response);
 };
 
+
 module.exports = utilsHelper;

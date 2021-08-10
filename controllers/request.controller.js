@@ -14,7 +14,10 @@ requestController.getAllRequests = async (req, res, next) => {
     const totalPages = Math.ceil(totalRequests / limit);
     const offset = limit * (page - 1);
 
-    const requests = await Requests.find().skip(offset).limit(limit);
+    const requests = await Requests.find()
+      .populate("receiver")
+      .skip(offset)
+      .limit(limit);
 
     utilsHelper.sendResponse(
       res,

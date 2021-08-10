@@ -29,9 +29,6 @@ requestController.getAllRequests = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-  } catch (error) {
-    next(error);
-  }
 };
 
 requestController.getSingleRequest = async (req, res, next) => {
@@ -84,27 +81,9 @@ requestController.createRequest = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
+    
 
-    let request = await Requests.create({
-      receiverId,
-      need,
-      requestFor,
-      location,
-      details,
-      media,
-    });
-    utilsHelper.sendResponse(
-      res,
-      200,
-      true,
-      { request },
-      null,
-      "Created new donation request successfully."
-    );
-  } catch (error) {
-    next(error);
-  }
-};
 
 requestController.updateRequest = async (req, res, next) => {
     try {

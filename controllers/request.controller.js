@@ -91,8 +91,8 @@ requestController.createRequest = async (req, res, next) => {
 requestController.updateRequest = async (req, res, next) => {
     try {
         let requestId = req.params.id;
-        let { status } = req.body;
-        let request = await Requests.findByIdAndUpdate(requestId, {status});
+        let { isWaiting } = req.body;
+        let request = await Requests.findByIdAndUpdate(requestId, {isWaiting});
         utilsHelper.sendResponse(
             res,
             200,

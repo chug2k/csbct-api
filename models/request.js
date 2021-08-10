@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const requestSchema = Schema(
     {
-        receiverId: {type: String, require: true},
+        receiver: { type: Object, require: true},
         need: {type: Number, require: true},
         amount_remaining: {type: Number, default: 1 },
         requestFor: {type: String, require: true},

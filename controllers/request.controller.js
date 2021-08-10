@@ -55,7 +55,7 @@ requestController.getSingleRequest = async (req, res, next) => {
 requestController.createRequest = async (req, res, next) => {
     try {
         let {
-            receiverId,
+            receiver,
             need,
             requestFor,
             location,
@@ -64,7 +64,7 @@ requestController.createRequest = async (req, res, next) => {
         } = req.body;
 
         let request = await Requests.create({
-            receiverId,
+            receiver,
             need,
             requestFor,
             location,

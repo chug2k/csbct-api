@@ -21,6 +21,6 @@ router.post("/login", authController.loginWithEmail);
  * @description User can logout and be redirected to main page
  * @access Has to be logged in
  */
-router.post("/logout", authController.logOut);
+// router.post("/logout", authController.logOut);
 
 module.exports = router;

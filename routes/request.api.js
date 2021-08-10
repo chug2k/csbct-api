@@ -2,14 +2,12 @@ const express = require("express");
 const requestController = require("../controllers/request.controller");
 const router = express.Router();
 
-
 /**
  * @route GET /donation_requests
  * @description Get all donation request
  * @access public
  */
 router.get("/", requestController.getAllRequests);
-
 
 /**
  * @route GET /donation_request/:id
@@ -18,8 +16,6 @@ router.get("/", requestController.getAllRequests);
  */
 router.get("/:id", requestController.getSingleRequest);
 
-
-
 /**
  * @route POST /donation_request
  * @description create a new request
@@ -27,14 +23,12 @@ router.get("/:id", requestController.getSingleRequest);
  */
 router.post("/", requestController.createRequest);
 
-
 /**
  * @route PUT /donation_request/:id
  * @description update/edit an existing request
  * @access login required (should be the one who created this request)
  */
 router.put("/:id", requestController.updateRequest);
-
 
 /**
  * @route DELETE /donation_request/:id

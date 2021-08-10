@@ -3,24 +3,24 @@ const receiverController = require("../controllers/receiver.controller");
 const router = express.Router();
 
 /**
- * @route POST api/receiver/request
- * @description Receiver can make a donation request
+ * @route GET api/receiver
+ * @description GET all receiver
  * @access LogIn required
  */
-router.post("/request", receiverController.request);
+router.get("/receiver", receiverController.getAllReceiver);
 
 /**
  * @route GET api/receiver/:id
  * @description User can search for a specific receiver
  * @access Public
  */
-router.post("/receiver/:id");
+router.get("/receiver/:id", receiverController.getSingleReceiver);
 
 /**
  * @route PUT api/receiver/request/edit/:id
- * @description Receiver can edit the donation request
+ * @description Receiver can edit his profile
  * @access LogIn required
  */
-router.put("/request/edit/:id", receiverController.edit);
+router.put("/request/edit/:id", receiverController.updateReceiver);
 
 module.exports = router;

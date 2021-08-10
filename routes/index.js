@@ -10,10 +10,9 @@ router.get("/", function (req, res, next) {
 const authApi = require("./auth.api");
 router.use("/auth", authApi);
 
-/* receiver endpoint */
-const receiverApi = require("./receiver.api");
-router.use("/receiver", receiverApi);
-
+// /* receiver endpoint */
+// const receiverApi = require("./receiver.api");
+// router.use("/receiver", receiverApi);
 
 /* Donation request endpoint */
 const donationRequestApi = require("./request.api");

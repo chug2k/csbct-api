@@ -1,7 +1,7 @@
 const { request } = require("../app");
 const utilsHelper = require("../helpers/utils.helper");
 const Requests = require("../models/request");
-const requestController ={};
+const requestController = {};
 
 requestController.getAllRequests = async (req, res, next) => {
     try {
@@ -29,8 +29,10 @@ requestController.getAllRequests = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+  } catch (error) {
+    next(error);
+  }
 };
-
 
 requestController.getSingleRequest = async (req, res, next) => {
     try {
@@ -38,19 +40,18 @@ requestController.getSingleRequest = async (req, res, next) => {
         let request = await Requests.findById({ _id: id });
         if (!request) return next(new Error("401 - Request does not exist."));
 
-        utilsHelper.sendResponse(
-            res,
-            200,
-            true,
-            {request},
-            null,
-            "Get single request successfully."
-        )
-    } catch (error) {
-        next(error)
-    }
+    utilsHelper.sendResponse(
+      res,
+      200,
+      true,
+      { request },
+      null,
+      "Get single request successfully."
+    );
+  } catch (error) {
+    next(error);
+  }
 };
-
 
 requestController.createRequest = async (req, res, next) => {
     try {
@@ -84,9 +85,26 @@ requestController.createRequest = async (req, res, next) => {
         next(error)
     }
 
-    
+    let request = await Requests.create({
+      receiverId,
+      need,
+      requestFor,
+      location,
+      details,
+      media,
+    });
+    utilsHelper.sendResponse(
+      res,
+      200,
+      true,
+      { request },
+      null,
+      "Created new donation request successfully."
+    );
+  } catch (error) {
+    next(error);
+  }
 };
-
 
 requestController.updateRequest = async (req, res, next) => {
     try {
@@ -113,7 +131,6 @@ requestController.updateRequest = async (req, res, next) => {
         next(error)
     }
 };
-
 
 requestController.deleteRequest = async (req, res, next) => {
     try {

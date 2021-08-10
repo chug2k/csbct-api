@@ -4,8 +4,6 @@ const receiverController = {};
 
 receiverController.getAllReceiver = async (req, res, next) => {
   try {
-    const page = req.params.page;
-    const limit = req.params.limit;
     let receiver = Receiver;
     const response = utilsHelper.sendResponse(
       res,
@@ -16,13 +14,7 @@ receiverController.getAllReceiver = async (req, res, next) => {
       "Get all receiver successfully."
     );
 
-    if (page && limit) {
-      let receiver = Receiver.splice((page - 1) * limit, page * limit + 1);
-      return response;
-    } else {
-      let receiver = Receiver.splice(0, 10);
-      return response;
-    }
+   
   } catch (error) {
     next(error);
   }

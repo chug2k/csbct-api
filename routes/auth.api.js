@@ -16,11 +16,4 @@ router.post("/register", authController.register);
  */
 router.post("/login", authController.loginWithEmail);
 
-/**
- * @route POST api/auth/logout
- * @description User can logout and be redirected to main page
- * @access Has to be logged in
- */
-// router.post("/logout", authController.logOut);
-
 module.exports = router;

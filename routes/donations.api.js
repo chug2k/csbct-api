@@ -7,27 +7,27 @@ const router = express.Router();
  * @description giver can make a create a donation
  * @access LogIn required
  */
-router.post("/donations", donationsController.donations);
+router.post("/donations", donationsController.createDonations);
 
 /**
  * @route GET api/giver/donations
  * @description giver can see all donations
  * @access LogIn required
  */
-router.get("/donations", donationsController.donations);
+router.get("/donations", donationsController.getAllDonations);
 
 /**
  * @route GET api/giver/:id
  * @description Giver can search for a specific donation
  * @access LogIn required
  */
-router.get("/giver/:id");
+router.get("/donations/:id", donationsController.getSingleDonations);
 
 /**
  * @route PUT api/giver/donations/:id
  * @description giver can edit the donation
  * @access LogIn required
  */
-router.put("/donations/:id", donationsController.edit);
+router.put("/donations/edit/:id", donationsController.updateDonation);
 
 module.exports = router;

@@ -17,7 +17,8 @@ requestController.getAllRequests = async (req, res, next) => {
     const requests = await Requests.find()
       .populate("receiver")
       .skip(offset)
-      .limit(limit);
+      .limit(limit)
+      .sort({ createdAt: "desc" });
 
     utilsHelper.sendResponse(
       res,

@@ -7,14 +7,14 @@ const router = express.Router();
  * @description Receiver see all receiver
  * @access LogIn required
  */
-router.post("/", receiverController.getAllReceiver);
+router.get("/", receiverController.getAllReceiver);
 
 /**
  * @route GET api/receiver/:id
  * @description User can search for a specific receiver
  * @access Public
  */
-router.post("/:id", receiverController.getSingleReceiver);
+router.get("/:id", receiverController.getSingleReceiver);
 
 /**
  * @route PUT api/receiver/request/edit/:id

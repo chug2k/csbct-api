@@ -7,7 +7,7 @@ donationsController.getAllDonations = async (req, res, next) => {
     const page = req.params.page;
     const limit = req.params.limit;
     let donations = Donations;
-    const resoinse = utilsHelper.sendResponse(
+    const response = utilsHelper.sendResponse(
       res,
       200,
       true,

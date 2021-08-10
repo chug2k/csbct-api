@@ -13,8 +13,6 @@ receiverController.getAllReceiver = async (req, res, next) => {
       null,
       "Get all receiver successfully."
     );
-
-   
   } catch (error) {
     next(error);
   }

@@ -1,4 +1,3 @@
-const { donations } = require("../app");
 const utilsHelper = require("../helpers/utils.helper");
 const Donations = require("../models/donations");
 const donationsController = {};
@@ -8,7 +7,7 @@ donationsController.getAllDonations = async (req, res, next) => {
     const page = req.params.page;
     const limit = req.params.limit;
     let donations = Donations;
-    const response = utilsHelper.sendResponse(
+    const resoinse = utilsHelper.sendResponse(
       res,
       200,
       true,
@@ -16,12 +15,11 @@ donationsController.getAllDonations = async (req, res, next) => {
       null,
       "Get all donations successfully."
     );
-
     if (page && limit) {
-      let donations = Donations.splice((page - 1) * limit, page * limit + 1);
+      let requests = Requests.splice((page - 1) * limit, page * limit + 1);
       return response;
     } else {
-      let donations = Donations.splice(0, 10);
+      let requests = Requests.splice(0, 10);
       return response;
     }
   } catch (error) {
@@ -64,8 +62,6 @@ donationsController.createDonations = async (req, res, next) => {
       userID,
       receipt_image_url,
       confirmed_by_receiver,
-      email,
-      message,
     });
     utilsHelper.sendResponse(
       res,

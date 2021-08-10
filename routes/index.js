@@ -14,9 +14,16 @@ router.use("/auth", authApi);
 // const receiverApi = require("./receiver.api");
 // router.use("/receiver", receiverApi);
 
-
 /* Donation request endpoint */
 const donationRequestApi = require("./request.api");
 router.use("/donation_requests", donationRequestApi);
+
+/* Donation request endpoint */
+// const donationRequestApi = require("./request.api");
+// router.use("/donation_requests", donationRequestApi);
+
+/* giver donation endpoint */
+const donationsApi = require("./donations.api");
+router.use("/donations", donationsApi);
 
 module.exports = router;

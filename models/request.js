@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
 const requestSchema = Schema(
     {
         receiver: { type: Object, require: true},
@@ -19,3 +18,4 @@ const requestSchema = Schema(
 
 const Requests = mongoose.model("Requests", requestSchema);
 module.exports = Requests;
+

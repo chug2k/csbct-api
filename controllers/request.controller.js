@@ -5,27 +5,27 @@ const requestController ={};
 
 requestController.getAllRequests = async (req, res, next) => {
     try {
-        const page = req.params.page;
-        const limit = req.params.limit;
-        let requests = Requests
-        const response = utilsHelper.sendResponse (
+        let page = req.query.page;
+        let limit = req.query.limit;
+        page = parseInt(page) || 1;
+        limit = parseInt(limit) || 10;
+
+        const totalRequests = await Requests.countDocuments();
+        const totalPages = Math.ceil(totalRequests / limit);
+        const offset = limit * (page-1);
+
+        const requests = await Requests.find()
+        .skip(offset)
+        .limit(limit);
+
+         utilsHelper.sendResponse (
             res,
             200,
             true,
-            {requests},
+            {requests, totalPages},
             null,
             "Get all requests successfully."
         )
-
-        if (page && limit) {
-          let requests = Requests.splice((page-1)*limit, page*limit+1);
-          return response
-        } else {
-          let requests = Requests.splice(0,10);
-          return response
-        };
-         
-        
     } catch (error) {
         next(error)
     }
@@ -35,7 +35,7 @@ requestController.getAllRequests = async (req, res, next) => {
 requestController.getSingleRequest = async (req, res, next) => {
     try {
         const { id } = req.body;
-        let request = await Requests.findOne({ id });
+        let request = await Requests.findById({ _id: id });
         if (!request) return next(new Error("401 - Request does not exist."));
 
         utilsHelper.sendResponse(
@@ -90,9 +90,16 @@ requestController.createRequest = async (req, res, next) => {
 
 requestController.updateRequest = async (req, res, next) => {
     try {
-        let requestId = req.params.id;
-        let { isWaiting } = req.body;
-        let request = await Requests.findByIdAndUpdate(requestId, {isWaiting});
+        let { id } = req.body;
+        let { received } = req.body;
+        let requestById = await Requests.findById({ _id: id });
+        console.log( id, received)
+        const  remaining  = requestById.amount_remaining - received / requestById.need;
+        const isWaiting = remaining <= 0 ? false : true
+        console.log(remaining, isWaiting)
+
+        let request = await Requests.findByIdAndUpdate(id, {amount_remaining: remaining, isWaiting: isWaiting});
+        console.log(request)
         utilsHelper.sendResponse(
             res,
             200,
@@ -101,6 +108,7 @@ requestController.updateRequest = async (req, res, next) => {
             null,
             "Updated successfully."
         )
+      
     } catch (error) {
         next(error)
     }
@@ -110,12 +118,12 @@ requestController.updateRequest = async (req, res, next) => {
 requestController.deleteRequest = async (req, res, next) => {
     try {
         let requestId = req.params.id;
-        let request = await Requests.findIdDelete(requestId);
+        await Requests.findByIdAndDelete(requestId);
         utilsHelper.sendResponse(
             res,
             200,
             true,
-            {request}, //not sure
+            null,
             null,
             "Deleted successfully."
         )
